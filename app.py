@@ -1,9 +1,9 @@
 import sys
 
-# Global storage (humans often use globals for small scripts)
+# Global storage
 wishlists = {}
 
-# Help message (less polished than AI)
+# Help message 
 def show_help():
     print("\n*** Wishlist Manager ***")
     print("create  - Make a new list")
@@ -62,16 +62,16 @@ def add_item():
     else:
         print("Okay, not adding it.")
 
-# Remove item (with stronger confirmation)
+# Remove item (
 def remove_item():
     if not wishlists:
-        print("Nothing to remove, dude.")
+        print("Nothing to remove, sorry/")
         return
     list_name = input("Which list? (or 'cancel'): ").strip()
     if list_name.lower() == 'cancel':
         return
     if list_name not in wishlists:
-        print("List not found. Did you typo?")
+        print("List not found, case sensitive")
         return
     items = wishlists[list_name]
     if not items:
@@ -86,17 +86,17 @@ def remove_item():
     if not choice.isdigit() or int(choice) < 1 or int(choice) > len(items):
         print("Invalid. Try again.")
         return
-    confirm = input(f"Really delete '{items[int(choice)-1][0]}'? (y/N): ").lower()
+    confirm = input(f"Do you want to delete '{items[int(choice)-1][0]}'? (y/N): ").lower()
     if confirm == 'y':
         removed_item = items.pop(int(choice) - 1)
-        print(f"Gone forever: '{removed_item[0]}'")
+        print(f"Item deleted: '{removed_item[0]}'")
     else:
-        print("Phew, close call.")
+        print("Item not deleted")
 
-# View wishlists (unchanged, still casual)
+# View wishlists 
 def view_wishlists():
     if not wishlists:
-        print("No lists yet. Get creating!")
+        print("No lists yet. Add some with the add command!")
         return
     print("\n=== YOUR WISHLISTS ===")
     for list_name, items in wishlists.items():
@@ -104,7 +104,7 @@ def view_wishlists():
         for item, desc, price in items:
             print(f" - {item} (${price:.2f}): {desc}")
 
-# Main loop (slightly messy, like human code)
+# Main loop 
 def main():
     print("\nWelcome to Wishlist Manager! (Type 'help' for commands)")
     while True:
@@ -120,7 +120,7 @@ def main():
         elif cmd in ('help', 'h', '?'):
             show_help()
         elif cmd in ('exit', 'quit', 'q'):
-            print("Later! Your lists are gone when you quit.")
+            print("Goodbye!")
             sys.exit()
         else:
             print("Huh? Try 'help'.")
